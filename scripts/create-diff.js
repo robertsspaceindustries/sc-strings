@@ -3,8 +3,6 @@ import * as diff from "diff";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 
-existsSync(differencesFolder) || mkdirSync(differencesFolder);
-
 const differencesFolder = "differences";
 const { live: liveBuilds, ptu: ptuBuilds } = getLatestBuilds();
 // , oldStem, newStem
@@ -36,6 +34,8 @@ const latestPtu = ptuBuilds.slice(0, 2);
 const livePair = latestLive.reverse();
 const ptuPair = latestPtu.reverse();
 const mixPair = [latestLive[0], latestPtu[0]].sort(sort).reverse();
+
+existsSync(differencesFolder) || mkdirSync(differencesFolder);
 
 if (livePair.length > 1) {
 	const diff = generateDiff(
