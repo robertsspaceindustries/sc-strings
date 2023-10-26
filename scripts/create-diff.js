@@ -1,14 +1,14 @@
 import getLatestBuilds, { sort } from "./utils/get-latest-builds.js";
 import * as diff from "diff";
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 
 existsSync(differencesFolder) || mkdirSync(differencesFolder);
 
 const differencesFolder = "differences";
 const { live: liveBuilds, ptu: ptuBuilds } = getLatestBuilds();
-
-function generateDiff(oldContent, oldStem, newContent, newStem) {
+// , oldStem, newStem
+function generateDiff(oldContent, newContent) {
 	const differences = diff.diffLines(oldContent, newContent);
 
 	const added = new Set();

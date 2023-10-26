@@ -1,0 +1,23 @@
+{
+	"env": {
+		"node": true,
+		"es2021": true
+	},
+	"extends": "eslint:recommended",
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": ["import"],
+	"ignorePatterns": ["dist"],
+	"rules": {
+		"linebreak-style": 0,
+		"semi": ["error", "always"],
+		"no-constant-condition": "off",
+		"no-async-promise-executor": "off",
+		"import/extensions": ["error", "ignorePackages"],
+		"no-unused-vars": "warn",
+		"prefer-const": "warn",
+		"no-control-regex": "off"
+	}
+}
