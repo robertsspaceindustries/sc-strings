@@ -19,11 +19,12 @@ function generateDiff(oldContent, oldStem, newContent, newStem) {
 			targetSet.add((difference.added ? "+" : difference.removed ? "-" : " ") + " " + value); // Added: "+" | Removed: "-" | Neither: " "
 	}
 
-	const headerSection = `# Comparing ${oldStem} with ${newStem}\n\n`;
+	// const headerSection = `# Comparing ${oldStem} with ${newStem}\n\n`;
 	const addedSection = "# Added\n" + [...added].join("\n");
 	const removedSection = "# Removed\n" + [...removed].join("\n");
 
-	return (headerSection + addedSection + "\n\n" + removedSection).replace(/[^\x00-\x7F]+/gi, ""); // Remove non-ascii characters
+	// headerSection +
+	return (addedSection + "\n\n" + removedSection).replace(/[^\x00-\x7F]+/gi, ""); // Remove non-ascii characters
 }
 
 const latestLive = liveBuilds.slice(0, 2);
