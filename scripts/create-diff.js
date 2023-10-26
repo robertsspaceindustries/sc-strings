@@ -74,7 +74,7 @@ if (mixPair.length > 1) {
 	);
 	
 	console.log(
-		`translations/${mixPair[0].file}`
+		`translations/${mixPair[0].file}`,
 		mixPair[0].stem,
 		`translations/${mixPair[1].file}`,
 		mixPair[1].stem,
