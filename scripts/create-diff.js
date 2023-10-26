@@ -66,12 +66,17 @@ if (ptuPair.length > 1) {
 }
 
 if (mixPair.length > 1) {
-	console.log(mixPair);
-
 	const diff = generateDiff(
 		readFileSync(`translations/${mixPair[0].file}`, "utf-8"),
 		mixPair[0].stem,
 		readFileSync(`translations/${mixPair[1].file}`, "utf-8"),
+		mixPair[1].stem,
+	);
+	
+	console.log(
+		`translations/${mixPair[0].file}`
+		mixPair[0].stem,
+		`translations/${mixPair[1].file}`,
 		mixPair[1].stem,
 	);
 
