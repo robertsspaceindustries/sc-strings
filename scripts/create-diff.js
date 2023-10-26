@@ -1,7 +1,9 @@
 import getLatestBuilds, { sort } from "./utils/get-latest-builds.js";
 import * as diff from "diff";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+
+existsSync(differencesFolder) || mkdirSync(differencesFolder);
 
 const differencesFolder = "differences";
 const { live: liveBuilds, ptu: ptuBuilds } = getLatestBuilds();
@@ -35,8 +37,6 @@ const livePair = latestLive.reverse();
 const ptuPair = latestPtu.reverse();
 const mixPair = [latestLive[0], latestPtu[0]].sort(sort).reverse();
 
-existsSync(differencesFolder) || mkdirSync(differencesFolder);
-
 if (livePair.length > 1) {
 	const diff = generateDiff(
 		readFileSync(`translations/${livePair[0].file}`, "utf-8"),
@@ -50,6 +50,7 @@ if (livePair.length > 1) {
 		diff,
 	);
 }
+
 if (ptuPair.length > 1) {
 	const diff = generateDiff(
 		readFileSync(`translations/${ptuPair[0].file}`, "utf-8"),
@@ -63,6 +64,7 @@ if (ptuPair.length > 1) {
 		diff,
 	);
 }
+
 if (mixPair.length > 1) {
 	console.log(mixPair);
 
