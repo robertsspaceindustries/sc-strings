@@ -19,7 +19,7 @@ function generateDiff(oldContent, oldStem, newContent, newStem) {
 			targetSet.add((difference.added ? "+" : difference.removed ? "-" : " ") + " " + value); // Added: "+" | Removed: "-" | Neither: " "
 	}
 
-	const headerSection = `# Comparing ${oldStem} with ${newStem}\n\n`,
+	const headerSection = `--- ${oldStem}\n` + `+++ ${newStem}\n\n`,
 		addedSection = "# Added\n" + [...added].join("\n"),
 		removedSection = "# Removed\n" + [...removed].join("\n");
 
