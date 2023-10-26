@@ -1,36 +1,79 @@
-import path from "node:path";
-import getLatestBuilds from "./utils/get-latest-builds.js";
+import getLatestBuilds, { sort } from "./utils/get-latest-builds.js";
 import * as diff from "diff";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import path from "node:path";
 
-const differencesFolder = path.resolve("differences");
+const differencesFolder = "differences";
+const { live: liveBuilds, ptu: ptuBuilds } = getLatestBuilds();
 
-const lastBuilds = getLatestBuilds().slice(0, 2).reverse(); // Old to new
-if (lastBuilds.length !== 2) console.error("Need 2 builds to compare"), process.exit(0);
+function generateDiff(oldContent, oldStem, newContent, newStem) {
+	const differences = diff.diffLines(oldContent, newContent);
 
-const [oldFile, newFile] = lastBuilds.map((build) =>
-	path.join(path.resolve("translations"), build.file),
-);
-const differences = diff.diffLines(readFileSync(oldFile, "utf-8"), readFileSync(newFile, "utf-8"));
+	const added = new Set();
+	const removed = new Set();
 
-const added = new Set();
-const removed = new Set();
+	for (const difference of differences) {
+		const targetSet = difference.added ? added : difference.removed ? removed : undefined;
+		if (!targetSet) continue;
+		for (const value of difference.value.split("\r\n").filter((v) => v !== ""))
+			targetSet.add((difference.added ? "+" : difference.removed ? "-" : " ") + " " + value); // Added: "+" | Removed: "-" | Neither: " "
+	}
 
-for (const difference of differences) {
-	const targetSet = difference.added ? added : difference.removed ? removed : undefined;
-	if (!targetSet) continue;
-	for (const value of difference.value.split("\r\n").filter((v) => v !== ""))
-		targetSet.add((difference.added ? "+" : difference.removed ? "-" : " ") + " " + value); // Added: "+" | Removed: "-" | Neither: " "
+	const headerSection = `# Comparing ${oldStem} with ${newStem}\n\n`;
+	const addedSection = "# Added\n" + [...added].join("\n");
+	const removedSection = "# Removed\n" + [...removed].join("\n");
+
+	return (headerSection + addedSection + "\n\n" + removedSection).replace(/[^\x00-\x7F]+/gi, ""); // Remove non-ascii characters
 }
 
-const headerSection =
-	"# " + `Comparing ${lastBuilds[0].stem} [old] with ${lastBuilds[1].stem} [new]\n\n`;
-const addedSection = "# Added\n" + [...added].join("\n");
-const removedSection = "# Removed\n" + [...removed].join("\n");
+const latestLive = liveBuilds.slice(0, 2);
+const latestPtu = ptuBuilds.slice(0, 2);
+
+// Reverse so it's from old-to-new
+const livePair = latestLive.reverse();
+const ptuPair = latestPtu.reverse();
+const mixPair = [latestLive[0], latestPtu[0]].sort(sort).reverse();
 
 existsSync(differencesFolder) || mkdirSync(differencesFolder);
 
-writeFileSync(
-	path.join(differencesFolder, lastBuilds.map((build) => build.stem).join(" ") + ".diff"),
-	(headerSection + addedSection + "\n\n" + removedSection).replace(/[^\x00-\x7F]+/gi, ""), // Remove non-ascii characters
-);
+if (livePair.length > 1) {
+	const diff = generateDiff(
+		readFileSync(`translations/${livePair[0].file}`, "utf-8"),
+		livePair[0].stem,
+		readFileSync(`translations/${livePair[1].file}`, "utf-8"),
+		livePair[1].stem,
+	);
+
+	writeFileSync(
+		path.join(differencesFolder, livePair.map((build) => build.stem).join(" ") + ".diff"),
+		diff,
+	);
+}
+if (ptuPair.length > 1) {
+	const diff = generateDiff(
+		readFileSync(`translations/${ptuPair[0].file}`, "utf-8"),
+		ptuPair[0].stem,
+		readFileSync(`translations/${ptuPair[1].file}`, "utf-8"),
+		ptuPair[1].stem,
+	);
+
+	writeFileSync(
+		path.join(differencesFolder, ptuPair.map((build) => build.stem).join(" ") + ".diff"),
+		diff,
+	);
+}
+if (mixPair.length > 1) {
+	console.log(mixPair);
+
+	const diff = generateDiff(
+		readFileSync(`translations/${mixPair[0].file}`, "utf-8"),
+		mixPair[0].stem,
+		readFileSync(`translations/${mixPair[1].file}`, "utf-8"),
+		mixPair[1].stem,
+	);
+
+	writeFileSync(
+		path.join(differencesFolder, mixPair.map((build) => build.stem).join(" ") + ".diff"),
+		diff,
+	);
+}
