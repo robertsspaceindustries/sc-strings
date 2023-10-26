@@ -1,0 +1,9 @@
+{
+	"type": "module",
+	"scripts": {
+		"diff:create": "node scripts/create-diff.js"
+	},
+	"dependencies": {
+		"diff": "^5.1.0"
+	}
+}
