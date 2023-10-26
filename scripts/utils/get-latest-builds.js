@@ -24,8 +24,8 @@ function convertFilename(file, branch) {
 
 export function sort(a, b) {
 	// Sort by version in descending order
-	const versionA = a.version.split(".").map(Number);
-	const versionB = b.version.split(".").map(Number);
+	const versionA = a.version.split(".").map(Number),
+		versionB = b.version.split(".").map(Number);
 
 	for (let i = 0; i < 3; i++) {
 		if (versionA[i] > versionB[i]) {
@@ -48,14 +48,13 @@ export function sort(a, b) {
 
 export default function getLatestBuilds() {
 	const translationsLive = fs
-		.readdirSync("translations/live")
-		.map((name) => convertFilename(name, "live"))
-		.sort(sort);
-
-	const translationsPtu = fs
-		.readdirSync("translations/ptu")
-		.map((name) => convertFilename(name, "ptu"))
-		.sort(sort);
+			.readdirSync("translations/live")
+			.map((name) => convertFilename(name, "live"))
+			.sort(sort),
+		translationsPtu = fs
+			.readdirSync("translations/ptu")
+			.map((name) => convertFilename(name, "ptu"))
+			.sort(sort);
 
 	return { live: translationsLive, ptu: translationsPtu };
 }
