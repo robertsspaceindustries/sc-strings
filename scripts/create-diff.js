@@ -23,10 +23,11 @@ function generateDiff(oldContent, oldStem, newContent, newStem) {
 		addedSection = "# Added\n" + [...added].join("\n"),
 		removedSection = "# Removed\n" + [...removed].join("\n");
 
-	return ((headerSection || "") + addedSection + "\n\n" + removedSection).replace(
-		/[^\x00-\x7F]+/gi, // Remove non-ascii characters
-		"",
-	);
+	return ((headerSection || "") + addedSection + "\n\n" + removedSection)
+	// .replace(
+	// 	/[^\x00-\x7F]+/gi, // Remove non-ascii characters
+	// 	"",
+	// );
 }
 
 const latestLive = liveBuilds.slice(0, 2),
