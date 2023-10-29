@@ -1,7 +1,7 @@
 {
 	"type": "module",
 	"scripts": {
-		"diff:create": "node scripts/create-diff.js",
+		"diff": "node scripts/create-diff.js",
 		"lint": "npx eslint ."
 	},
 	"dependencies": {
