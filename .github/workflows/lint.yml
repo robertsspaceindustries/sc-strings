@@ -3,10 +3,14 @@ on:
         branches: ["main"]
         paths:
             - "src/**"
+            - ".eslintrc.json"
+            - "package.json"
     pull_request:
         branches: ["main"]
         paths:
             - "src/**"
+            - ".eslintrc.json"
+            - "package.json"
 
 jobs:
     lint:
