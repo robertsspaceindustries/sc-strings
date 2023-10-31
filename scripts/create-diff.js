@@ -1,7 +1,6 @@
-import getLatestBuilds, { sort } from "./utils/get-latest-builds.js";
+import getLatestBuilds from "./utils/get-latest-builds.js";
 import * as diff from "diff";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
-import path from "node:path";
 
 existsSync("differences") || mkdirSync("differences");
 
