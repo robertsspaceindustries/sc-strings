@@ -7,18 +7,23 @@ function removeFileExtension(path) {
 		.join(".");
 }
 
-function convertFilename(file, branch) {
-	const [game, versionName, version, id] = removeFileExtension(file).split("-");
+function capitalizeFirstLetter(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function convertFilename(filename, channel) {
+	const [_game, release, version, change] = removeFileExtension(filename).split("-");
 
 	return {
-		game,
-		versionName,
+		release,
 		version,
-		id,
-		branch,
-
-		file: branch + "/" + file,
-		stem: removeFileExtension(file) + "-" + branch,
+		change,
+		name:
+			`Star Citizen ${capitalizeFirstLetter(release)} ` +
+			`${capitalizeFirstLetter(version)} ` +
+			`${channel.toUpperCase()}.${change}`,
+		stem: removeFileExtension(filename) + "-" + channel.replaceAll("-", "_"),
+		filename: filename,
 	};
 }
 
@@ -46,15 +51,23 @@ export function sort(a, b) {
 	return 0;
 }
 
-export default function getLatestBuilds() {
-	const translationsLive = fs
-			.readdirSync("translations/live")
-			.map((name) => convertFilename(name, "live"))
-			.sort(sort),
-		translationsPtu = fs
-			.readdirSync("translations/ptu")
-			.map((name) => convertFilename(name, "ptu"))
-			.sort(sort);
+export default async function getLatestBuilds() {
+	const channels = fs.readdirSync("translations").filter(
+		(folder) => !fs.existsSync("translations/" + folder + "/.noinclude"), // Remove channels that have the .noinclude file
+	);
 
-	return { live: translationsLive, ptu: translationsPtu };
+	const channelsWithBuilds = {};
+
+	for (const channel of channels) {
+		channelsWithBuilds[channel] = fs
+			.readdirSync("translations/" + channel)
+			.filter((filename) => !filename.startsWith(".") && filename.endsWith(".ini"))
+			.map((filename) => convertFilename(filename, channel))
+			.sort(sort)
+			.reverse(); // So it's antecedent
+
+		channelsWithBuilds[channel].base = fs.existsSync("translations/" + channel + "/.base"); // If exists, this channel will be the baseline version for all differences
+	}
+
+	return channelsWithBuilds;
 }

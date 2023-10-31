@@ -1,2 +1,3 @@
 # sc-strings
-Star Citizen internationalization comparisons
+
+Star Citizen string comparisons

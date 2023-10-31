@@ -3,10 +3,9 @@ import * as diff from "diff";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 
-const differencesFolder = "differences",
-	{ live: liveBuilds, ptu: ptuBuilds } = getLatestBuilds();
+existsSync("differences") || mkdirSync("differences");
 
-function generateDiff(oldContent, oldStem, newContent, newStem) {
+function generateDiff(oldContent, oldName, newContent, newName) {
 	const differences = diff.diffLines(oldContent, newContent);
 
 	const added = new Set(),
@@ -19,61 +18,37 @@ function generateDiff(oldContent, oldStem, newContent, newStem) {
 			targetSet.add((difference.added ? "+" : difference.removed ? "-" : " ") + " " + value); // Added: "+" | Removed: "-" | Neither: " "
 	}
 
-	const headerSection = `--- ${oldStem}\n` + `+++ ${newStem}\n\n`,
+	const headerSection = `--- ${oldName}\n` + `+++ ${newName}\n\n`,
 		addedSection = "# Added\n" + [...added].join("\n"),
 		removedSection = "# Removed\n" + [...removed].join("\n");
 
-	return ((headerSection || "") + addedSection + "\n\n" + removedSection)
-	// .replace(
-	// 	/[^\x00-\x7F]+/gi, // Remove non-ascii characters
-	// 	"",
-	// );
+	return (headerSection || "") + addedSection + "\n\n" + removedSection;
 }
 
-const latestLive = liveBuilds.slice(0, 2),
-	latestPtu = ptuBuilds.slice(0, 2);
+const channels = await getLatestBuilds(); // The builds in each channel are antecedent
 
-// Reverse so it's from old-to-new
-const livePair = latestLive.reverse(),
-	ptuPair = latestPtu.reverse(),
-	mixPair = [latestLive[0], latestPtu[0]].sort(sort).reverse();
+const baseChannelName = Object.keys(channels).find((channelName) => channels[channelName].base),
+	channelsToCompare = Object.keys(channels).map((channel) => [baseChannelName, channel]);
 
-// Debug
-console.log("livePair:", JSON.stringify(livePair));
-console.log("ptuPair:", JSON.stringify(ptuPair));
-console.log("mixPair:", JSON.stringify(mixPair));
+for (const [channel1Name, channel2Name] of channelsToCompare) {
+	const channel1 = channels[channel1Name],
+		channel1Path = "translations/" + channel1Name,
+		channel2 = channels[channel2Name],
+		channel2Path = "translations/" + channel2Name;
 
-existsSync(differencesFolder) || mkdirSync(differencesFolder);
+	const latest1 = channel1[0],
+		latest2 = channel2[0];
+	if (!(latest1 || latest2)) continue;
 
-if (livePair.length > 1)
-	writeFileSync(
-		path.join(differencesFolder, livePair.map((build) => build.stem).join(" ") + ".diff"),
-		generateDiff(
-			readFileSync(`translations/${livePair[0].file}`, "utf-8"),
-			livePair[0].stem,
-			readFileSync(`translations/${livePair[1].file}`, "utf-8"),
-			livePair[1].stem,
-		),
+	const removeDuplicates = [...new Set([latest1, latest2])];
+	if (removeDuplicates.length < 2) continue;
+
+	const diff = generateDiff(
+		readFileSync(channel1Path + "/" + latest1.filename, "utf-8"),
+		latest1.name,
+		readFileSync(channel2Path + "/" + latest2.filename, "utf-8"),
+		latest2.name,
 	);
 
-if (ptuPair.length > 1)
-	writeFileSync(
-		path.join(differencesFolder, ptuPair.map((build) => build.stem).join(" ") + ".diff"),
-		generateDiff(
-			readFileSync(`translations/${ptuPair[0].file}`, "utf-8"),
-			ptuPair[0].stem,
-			readFileSync(`translations/${ptuPair[1].file}`, "utf-8"),
-			ptuPair[1].stem,
-		),
-	);
-
-if (mixPair.length > 1)
-	writeFileSync(
-		path.join(differencesFolder, mixPair.map((build) => build.stem).join(" ") + ".diff"),
-		generateDiff(
-			readFileSync(`translations/${mixPair[0].file}`, "utf-8"),
-			mixPair[0].stem,
-			readFileSync(`translations/${mixPair[1].file}`, "utf-8"),
-			mixPair[1].stem,
-		),
-	);
+	writeFileSync("differences/" + latest1.stem + " " + latest2.stem + ".diff", diff);
+}
