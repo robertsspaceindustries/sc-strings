@@ -12,6 +12,7 @@ function capitalizeFirstLetter(string) {
 }
 
 function convertFilename(filename, channel) {
+	// eslint-disable-next-line no-unused-vars
 	const [_game, release, version, change] = removeFileExtension(filename).split("-");
 
 	return {
@@ -63,8 +64,7 @@ export default async function getLatestBuilds() {
 			.readdirSync("translations/" + channel)
 			.filter((filename) => !filename.startsWith(".") && filename.endsWith(".ini"))
 			.map((filename) => convertFilename(filename, channel))
-			.sort(sort)
-			.reverse(); // So it's antecedent
+			.sort(sort);
 
 		channelsWithBuilds[channel].base = fs.existsSync("translations/" + channel + "/.base"); // If exists, this channel will be the baseline version for all differences
 	}

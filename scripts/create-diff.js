@@ -27,17 +27,31 @@ function generateDiff(oldContent, oldName, newContent, newName) {
 const channels = await getLatestBuilds(); // The builds in each channel are antecedent
 
 const baseChannelName = Object.keys(channels).find((channelName) => channels[channelName].base),
-	channelsToCompare = Object.keys(channels).map((channel) => [baseChannelName, channel]);
+	channelsToCompare = [
+		...Object.keys(channels).map((channel) => [baseChannelName, channel]),
+		...Object.keys(channels)
+			.filter((channel) => channel !== baseChannelName)
+			.map((channel) => [channel, channel]),
+	];
+
+console.log("Base channel:", baseChannelName);
+console.log("Comparing channels:", channelsToCompare);
 
 for (const [channel1Name, channel2Name] of channelsToCompare) {
-	const channel1 = channels[channel1Name],
-		channel1Path = "translations/" + channel1Name,
-		channel2 = channels[channel2Name],
+	let channel1 = channels[channel1Name];
+	const channel2 = channels[channel2Name];
+
+	const channel1Path = "translations/" + channel1Name,
 		channel2Path = "translations/" + channel2Name;
 
+	if (channel1Name === channel2Name) channel1 = channel1.reverse();
+
 	const latest1 = channel1[0],
-		latest2 = channel2[0];
-	if (!(latest1 || latest2)) continue;
+		latest2 = channel2[channel1Name === channel2Name ? 1 : 0];
+	if (!(latest1 && latest2)) continue;
+
+	console.log(channel1Name, "v.", channel2Name, latest1.name, "old");
+	console.log(channel1Name, "v.", channel2Name, latest2.name, "new");
 
 	const removeDuplicates = [...new Set([latest1, latest2])];
 	if (removeDuplicates.length < 2) continue;
@@ -48,6 +62,8 @@ for (const [channel1Name, channel2Name] of channelsToCompare) {
 		readFileSync(channel2Path + "/" + latest2.filename, "utf-8"),
 		latest2.name,
 	);
+
+	console.log("Made diff for", latest1.name, latest2.name);
 
 	writeFileSync("differences/" + latest1.stem + " " + latest2.stem + ".diff", diff);
 }
