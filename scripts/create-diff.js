@@ -26,8 +26,6 @@ function generateDiff(oldContent, oldName, newContent, newName) {
 
 const channels = await getLatestBuilds(); // The builds in each channel are antecedent
 
-console.log("Channels", channels);
-
 const baseChannelName = Object.keys(channels).find((channelName) => channels[channelName].base),
 	channelsToCompare = [
 		...Object.keys(channels).map((channel) => [baseChannelName, channel]),
@@ -40,16 +38,16 @@ console.log("Base channel:", baseChannelName);
 console.log("Comparing channels:", channelsToCompare);
 
 for (const [channel1Name, channel2Name] of channelsToCompare) {
-	let channel1 = channels[channel1Name];
-	const channel2 = channels[channel2Name];
+	const channel1 = channels[channel1Name],
+		channel2 = channels[channel2Name];
 
 	const channel1Path = "translations/" + channel1Name,
 		channel2Path = "translations/" + channel2Name;
 
-	if (channel1Name === channel2Name) channel1 = channel1.reverse();
+	console.log(channel1Name, "v.", channel2Name, channel1, channel2);
 
-	const latest1 = channel1[0],
-		latest2 = channel2[channel1Name === channel2Name ? 1 : 0];
+	const latest1 = channel1[channel1Name === channel2Name ? 1 : 0], // Old
+		latest2 = channel2[0]; // New
 	if (!(latest1 && latest2)) continue;
 
 	console.log(channel1Name, "v.", channel2Name, latest1.name, "old");
