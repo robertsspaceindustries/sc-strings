@@ -26,6 +26,8 @@ function generateDiff(oldContent, oldName, newContent, newName) {
 
 const channels = await getLatestBuilds(); // The builds in each channel are antecedent
 
+console.log("Channels", channels);
+
 const baseChannelName = Object.keys(channels).find((channelName) => channels[channelName].base),
 	channelsToCompare = [
 		...Object.keys(channels).map((channel) => [baseChannelName, channel]),

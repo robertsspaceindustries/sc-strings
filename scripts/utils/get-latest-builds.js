@@ -29,27 +29,13 @@ function convertFilename(filename, channel) {
 }
 
 export function sort(a, b) {
-	// Sort by version in descending order
-	const versionA = a.version.split(".").map(Number),
-		versionB = b.version.split(".").map(Number);
+	const versionComparison = b.version.localeCompare(a.version);
 
-	for (let i = 0; i < 3; i++) {
-		if (versionA[i] > versionB[i]) {
-			return -1; // Sort in descending order for version
-		}
-		if (versionA[i] < versionB[i]) {
-			return 1; // Sort in descending order for version
-		}
+	if (versionComparison === 0) {
+		return b.change - a.change;
 	}
 
-	// If versions are equal, sort by id in descending order
-	if (a.id > b.id) {
-		return -1; // Sort in descending order for id
-	} else if (a.id < b.id) {
-		return 1; // Sort in descending order for id
-	}
-
-	return 0;
+	return versionComparison;
 }
 
 export default async function getLatestBuilds() {
