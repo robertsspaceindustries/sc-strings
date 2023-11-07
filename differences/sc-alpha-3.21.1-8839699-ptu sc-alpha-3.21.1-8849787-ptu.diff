@@ -1,0 +1,46 @@
+--- Star Citizen Alpha 3.21.1 PTU.8839699
++++ Star Citizen Alpha 3.21.1 PTU.8849787
+
+# Added
++ DynamicEvent_FleetWeek2022_FailReason_DetrimentalAction=Performed an action detrimental to the contract's completion.
++ DynamicEvent_FleetWeek2022_FailReason_DidntLeaveArea=Failed to leave area.
++ DynamicEvent_FleetWeek2022_FailReason_LastChanceFailed=All CDF on Admin Center have been lost.
++ DynamicEvent_FleetWeek2022_FailReason_MissionCriticalShipsLost=All contract critical ships destroyed.
++ DynamicEvent_FleetWeek2022_ReachAndWait,P=Reach the Crusader Showroom lobby and wait for further instructions %ls
++ Tut01_Hint07_EquipHelmet=To survive in the vacuum of space and other harsh environments, use Interaction Mode [~action(player_choice|pc_interaction_mode)] to equip the helmet located inside your Hab, or equip one from your Inventory using [~action(player_choice|pc_pit_inventory)].
++ Tut03_Part02_Hint08b_ShipRotate=Text: To roll your ship to the left or right, use [~action(spaceship_movement|v_roll_left)] and [~action(spaceship_movement|v_roll_right)] respectively.
++ Tut03_Part03_Hint02c_PingScan=To quickly scan your ship’s surroundings, hold and then release [~action(spaceship_radar|v_invoke_ping)]. This will send out a radar ping that briefly highlights nearby objects, vessels, or terrain. This is especially useful in darkness or low visibility.
++ itemPort_port_Flair01=Flair Item Dashboard
++ itemPort_port_Flair02=Flair Item Hanging
++ item_DescGRIN_TractorBeam_002_shared=Manufacturer: Greycat Industrial\nItem Type: Tractor Beam\nMax Angle: 60°\nMax Range: 150 m\nFull Strength Distance: 75 m\n\nBacked by their certified Soft-Touch® guarantee, Greycat’s SureGrip tractor beam, is a mainstay of its product catalogue thanks to its dependable range and control.
++ item_DescGRIN_TractorBeam_002_shared_UT1=Manufacturer: Greycat Industrial\nItem Type: Tractor Beam\nMax Angle: 60°\nMax Range: 130 m\nFull Strength Distance: 55 m\n\nThis heavy-duty variant of Greycat’s SureGrip tractor beam sacrifices range in exchange for additional power to handle larger and heavier objects. As a result, the device is most commonly used in a variety of industrial applications where its added power makes it an essential tool.
++ item_DescGRIN_TractorBeam_002_shared_UT2=Manufacturer: Greycat Industrial\nMax Angle: 80°\nMax Range: 130 m\nFull Strength Distance: 55 m\n\nThis precision variant of Greycat’s SureGrip tractor beam sacrifices some of the power and range of the base model in exchange for a wider angle of manipulation and greater tether grip, making it much harder to lose hold of an object. This precision makes this model an essential tool for any enterprise that requires careful handling.
++ item_DescGRIN_TractorBeam_003_shared=Manufacturer: Greycat Industrial\nItem Type: Tractor Beam\nMax Angle: 80°\nMax Range: 135 m\nFull Strength Distance: 50 m\n\nThe ViseLock Tractor Beam is an evolution of Greycat’s industry-standard tech, with added improvements specifically intended to help security forces restrain their targets. In its design, Greycat sacrificed some hold strength at greater distances to achieve a more powerful tether that is harder to escape.
++ item_DescGRIN_TractorBeam_004_S3=Manufacturer: Greycat Industrial\nItem Type: Towing Beam\nMax Angle: 160°\nMax Range: 250 m\nFull Strength Distance: 200 m\n\nThe safe and secure choice of recovery teams across the empire, the SafeTow towing beam from Greycat Industrial boasts enough strength, power, and control to transport both heavy cargo and entire vehicles across the ‘verse.
++ item_DescGRIN_TractorBeam_module_001=Manufacturer: Greycat Industrial\nItem Type: Tractor Beam\nMax Angle: 60°\nMax Range: 150 m\nFull Strength Distance: 75 m\n\nThe Ready Grip Tractor Module compresses the dependability and power of Greycat’s signature tractor beam technology into a smaller sub-component that can be attached to a salvaging laser head.
++ item_NameGRIN_TractorBeam_002_S1=SureGrip S1 Tractor Beam
++ item_NameGRIN_TractorBeam_002_S1_UT1=SureGrip HV-S1 Tractor Beam
++ item_NameGRIN_TractorBeam_002_S1_UT2=SureGrip PR-S1 Tractor Beam
++ item_NameGRIN_TractorBeam_002_S2=SureGrip S2 Tractor Beam
++ item_NameGRIN_TractorBeam_002_S2_UT1=SureGrip HV-S2 Tractor Beam
++ item_NameGRIN_TractorBeam_002_S2_UT2=SureGrip PR-S2 Tractor Beam
++ item_NameGRIN_TractorBeam_002_S3=SureGrip S3 Tractor Beam
++ item_NameGRIN_TractorBeam_002_S3_UT1=SureGrip HV-S3 Tractor Beam
++ item_NameGRIN_TractorBeam_002_S3_UT2=SureGrip PR-S3 Tractor Beam
++ item_NameGRIN_TractorBeam_003_S1=ViseLock S1 Tractor Beam
++ item_NameGRIN_TractorBeam_003_S2=ViseLock S2 Tractor Beam
++ item_NameGRIN_TractorBeam_003_S3=ViseLock S3 Tractor Beam
++ item_NameGRIN_TractorBeam_004_S3=SafeTow S3 Towing Beam
++ item_NameGRIN_TractorBeam_module_001=ReadyGrip Tractor Module
++ item_SubTypeFlair_Hanging=Hanging
++ item_SubTypeFlair_Static=Dashboard
++ item_SubTypeQDrive=
++ item_TypeFlair_Cockpit=Cockpit Flair
+
+# Removed
+- DynamicEvent_FleetWeek2022_ReachAndWait=Reach the Platform and Wait for Instructions 
+- Tut01_Hint07_EquipHelmet=To survive in the vacuum of space and other harsh environments, use Interaction Mode [~action(player_choice|pc_interaction_mode)] to equip the helmet located inside your Hab. Once equipped, you can see the helmet you have on in your Inventory [~action(player_choice|pc_pit_inventory)].
+- Tut03_Part02_Hint08b_ShipRotate=To roll your ship to the left or right, use [Q] and [E] respectively.
+- Tut03_Part03_Hint02c_PingScan=To quickly scan your ship’s surroundings, hold and then release [V]. This will send out a radar ping that briefly highlights nearby objects, vessels, or terrain. This is especially useful in darkness or low visibility.
+- itemPort_port_Flair01=Flair Item 1
+- itemPort_port_Flair02=Flair Item 2
