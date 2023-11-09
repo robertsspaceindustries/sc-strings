@@ -1,0 +1,26 @@
+--- Star Citizen Alpha 3.21.1 PTU.8860064
++++ Star Citizen Alpha 3.21.1 PTU.8867388
+
+# Added
++ DynamicEvent_FleetWeek2022_ReachAndWait=Wait for Instructions at the Crusader Showroom Lobby: %ls
++ Tut02_Obj01_ExitApartment_HUD=Open Door
++ Tut03_Part03_Obj4_UseASOP_HUD=Store Tutorial Ship
++ ui_weapons_multi_02_Charging,P=Charging
++ ui_weapons_multi_02_Draining,P=Draining
++ ui_weapons_multi_02_Electro,P=Electro
++ ui_weapons_multi_02_Material,P=Material
++ ui_weapons_multi_02_Move,P=Move
++ ui_weapons_multi_02_Power,P=Power
++ ui_weapons_multi_02_Repairing,P=Repairing
++ ui_weapons_multi_02_Rotating,P=Rotating
++ ui_weapons_multi_02_Salvaging,P=Salvaging
++ ui_weapons_multi_02_Stored,P=Stored
++ ui_weapons_multi_02_Target,P=Target
++ ui_weapons_multi_02_Tractor,P=Tractor
++ ui_weapons_multi_02_Tractoring,P=Tractoring
++ vehicle_DescVNCL_Scythe=Manufacturer: Esperia\nFocus: Medium Fighter\n\nFast becoming the symbol of the Vanduul Race, the Scythe is the foot soldier in every raid and the target of every human fighter pilot. Featuring a hefty weapons payload, the Scythe's real asset is its maneuverability, found in the twin main and twelve maneuvering thrusters. This captured Vanduul-made Scythe has been modified by Esperia to be flyable by Human pilots.
+
+# Removed
+- DynamicEvent_FleetWeek2022_ReachAndWait,P=Reach the Crusader Showroom lobby and wait for further instructions %ls
+- Tut03_Part03_Obj4_UseASOP_HUD =Store Tutorial Ship
+- vehicle_DescVNCL_Scythe=Manufacturer: Esperia\nFocus: Medium Fighter\n\nFast becoming the symbol of the Vanduul Race, the Scythe is the foot soldier in every raid and the target of every human fighter pilot. Featuring a hefty weapons payload, the Scythe's real asset is its maneuverability, found in the twin main and twelve maneuvering thrusters.
