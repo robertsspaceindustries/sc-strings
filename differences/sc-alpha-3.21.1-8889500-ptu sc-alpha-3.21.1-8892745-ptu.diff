@@ -1,0 +1,10 @@
+--- Star Citizen Alpha 3.21.1 PTU.8889500
++++ Star Citizen Alpha 3.21.1 PTU.8892745
+
+# Added
++ confirmkill_location_0003=~mission(TargetName|Last)'s Last Known Position
++ vehicle_DescMISC_Endeavor=Manufacturer: MISC\nFocus: Science\n\nMusashi Industrial & Starflight Concern is proud to present the Endeavor-class research vessel, a fully modular space platform designed to be adapted for a variety of scientific and medical tasks. Initially developed as a floating laboratory, the MISC Endeavor can be outfitted for everything from spatial telescopy to use as a mobile hospital.
+
+# Removed
+- confirmkill_location_0003=~mission(TargetName|NickOrFirst)'s last known position
+- vehicle_DescMISC_Endeavor=Manufacturer: MISC\nFocus: Science\n\nMusashi Industrial & Starflight Concern is proud to present the Endeavor-class research vessel, a fully modular space platform designed to be adapted for a variety of scientific and medical tasks. Initially developed as a floating laboratory, the MISC Endeavor can be outfitted for everything from spatial telescopy to use as mobile hospital.
