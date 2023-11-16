@@ -34,7 +34,6 @@ const baseChannelName = Object.keys(channels).find((channelName) => channels[cha
 			.map((channel) => [channel, channel]),
 	];
 
-console.log("Base channel:", baseChannelName);
 console.log("Comparing channels:", channelsToCompare);
 
 for (const [channel1Name, channel2Name] of channelsToCompare) {
@@ -44,12 +43,11 @@ for (const [channel1Name, channel2Name] of channelsToCompare) {
 	const channel1Path = "translations/" + channel1Name,
 		channel2Path = "translations/" + channel2Name;
 
-	console.log(channel1Name, "v.", channel2Name, channel1, channel2);
-
 	const latest1 = channel1[channel1Name === channel2Name ? 1 : 0], // Old
 		latest2 = channel2[0]; // New
 	if (!(latest1 && latest2)) continue;
-
+	if (Number(latest1.change) > Number(latest2.change)) continue;
+	
 	console.log(channel1Name, "v.", channel2Name, latest1.name, "old");
 	console.log(channel1Name, "v.", channel2Name, latest2.name, "new");
 
