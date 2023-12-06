@@ -1,0 +1,23 @@
+--- Star Citizen Alpha 3.22.0 PTU.8962480
++++ Star Citizen Alpha 3.22.0 PTU.8972263
+
+# Added
++ ShipStrip_missioncomplete_structural=Vehicle Structure Salvaged
++ ShipStrip_missioncomplete_tow=Vehicle Towed Away
++ TimedSalvage_MissionComplete_Tow=Vehicle Towed Away
++ ea_ui_mode_FPSKillConfirmed=Kill Collector: FPS
++ ea_ui_mode_GravRace=Grav Race
++ ea_ui_mode_VehicleKillConfirmed=Kill Collector: Vehicle
++ ea_ui_modedesc_GravRace=Pure racing. Push your grav-lev to its limit and be the first to cross the finish line.
+
+# Removed
+- GMCapture_Desc,P=Capture and secure the target, target info will be sent upon accepting
+- GMCapture_From,P=Filip Barsararsra
+- GMCapture_HUD,P=Capture ~mission(ObjectToCapture)
+- GMCapture_Marker,P=Capture ~mission(ObjectToCapture)
+- GMCapture_Obj_Long,P=Capture ~mission(ObjectToCapture)
+- GMCapture_Obj_Short,P=Capture ~mission(ObjectToCapture)
+- GMCapture_Title,P=Capture and secure the target
+- ShipStrip_missioncomplete_structural=Ship Structurally Salvaged
+- ShipStrip_missioncomplete_tow=Ship Towed Away
+- TimedSalvage_MissionComplete_Tow=Ship Towed Away
