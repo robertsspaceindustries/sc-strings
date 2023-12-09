@@ -1,0 +1,41 @@
+--- Star Citizen Alpha 3.22.0 PTU.8983350
++++ Star Citizen Alpha 3.22.0 PTU.8996133
+
+# Added
++ ea_ui_frontend_ExperimentalModes=Experimental Modes
++ ea_ui_frontend_ExperimentalModesActive=Active Experimental Modes:
++ ea_ui_frontend_ExperimentalModesReset=Ends in:
++ ea_ui_frontend_specialevent_AlienWeek_Description,P=Alien Week, text ,text, more text.
++ ea_ui_frontend_specialevent_AlienWeek_Title,P=Alien Week
++ ea_ui_frontend_specialevent_AprilFools_Description,P=Fool your enemies by pretending to be someone you're not.
++ ea_ui_frontend_specialevent_AprilFools_Title,P=April Fools
++ ea_ui_frontend_specialevent_CitizenCon_Description,P=Citizen Con, text ,text, more text.
++ ea_ui_frontend_specialevent_CitizenCon_Title,P=Citizen Con
++ ea_ui_frontend_specialevent_FightOrFlight_Description,P=Fight or Flight, text ,text, more text.
++ ea_ui_frontend_specialevent_FightOrFlight_Title,P=Fight or Flight
++ ea_ui_frontend_specialevent_FoundationFestival_Description,P=Foundation Festival, text ,text, more text.
++ ea_ui_frontend_specialevent_FoundationFestival_Title,P=Foundation Festival
++ ea_ui_frontend_specialevent_Halloween_Description,P=Halloween, text ,text, more text.
++ ea_ui_frontend_specialevent_Halloween_Title,P=Halloween
++ ea_ui_frontend_specialevent_IAE_Description,P=IAE, text ,text, more text.
++ ea_ui_frontend_specialevent_IAE_Title,P=IAE
++ ea_ui_frontend_specialevent_Invictus_Description,P=Invictus, text ,text, more text.
++ ea_ui_frontend_specialevent_Invictus_Title,P=Invictus
++ ea_ui_frontend_specialevent_LunarNewYear_Description,P=Red Festival, go collect those coins.
++ ea_ui_frontend_specialevent_LunarNewYear_Title,P=Red Festival
++ ea_ui_frontend_specialevent_MurrayCup_Description,P=Murray Cup, text ,text, more text.
++ ea_ui_frontend_specialevent_MurrayCup_Title,P=Murray Cup
++ ea_ui_frontend_specialevent_PirateWeek_Description,P=Pirate Week, text ,text, more text.
++ ea_ui_frontend_specialevent_PirateWeek_Title,P=Pirate Week
++ ea_ui_frontend_specialevent_PlayerBirthday_Description,P=Player Birthday, text ,text, more text.
++ ea_ui_frontend_specialevent_PlayerBirthday_Title,P=Player Birthday
++ ea_ui_frontend_specialevent_StPatricks_Description,P=Find the hidden pots all around the map.
++ ea_ui_frontend_specialevent_StPatricks_Title,P=St. Patricks
++ ea_ui_frontend_specialevent_ValentinesDay_Description,P=Duo up with your partner to have a showdown against others.
++ ea_ui_frontend_specialevent_ValentinesDay_Title,P=Coramor
++ ea_ui_frontend_specialevent_Xmas_Description,P=Luminalia, text ,text, more text.
++ ea_ui_frontend_specialevent_Xmas_Title,P=Luminalia
++ itemPort_port_NamePaint=Livery
+
+# Removed
+- itemPort_port_NamePaint=Exterior Paint
