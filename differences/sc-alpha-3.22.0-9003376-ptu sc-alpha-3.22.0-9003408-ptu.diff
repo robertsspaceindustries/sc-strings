@@ -1,0 +1,8 @@
+--- Star Citizen Alpha 3.22.0 PTU.9003376
++++ Star Citizen Alpha 3.22.0 PTU.9003408
+
+# Added
++ Frontend_PU_Version=3.22.0 - Wrecks to Riches
+
+# Removed
+- Frontend_PU_Version=3.22.0 - Structural Salvage
