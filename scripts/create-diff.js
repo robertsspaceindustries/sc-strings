@@ -16,7 +16,9 @@ function generateDiff(oldContent, oldName, newContent, newName) {
             : difference.removed
             ? removed
             : undefined;
+
         if (!targetSet) continue;
+
         for (const value of difference.value
             .split("\r\n")
             .filter((v) => v !== ""))
@@ -74,6 +76,8 @@ for (const [channel1Name, channel2Name] of channelsToCompare) {
     const removeDuplicates = [...new Set([latest1, latest2])];
     if (removeDuplicates.length < 2) continue;
 
+    console.log(channel1Name, channel2Name, "no duplicates, continue");
+
     const diff = generateDiff(
         readFileSync(channel1Path + "/" + latest1.filename, "utf-8"),
         latest1.name,
@@ -88,5 +92,5 @@ for (const [channel1Name, channel2Name] of channelsToCompare) {
             "differences/" + latest1.stem + " " + latest2.stem + ".diff",
             diff
         );
-    }
+    } else console.log(channel1Name, channel2Name, "no diff returned", diff);
 }
